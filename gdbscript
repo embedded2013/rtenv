@@ -1,0 +1,25 @@
+shell rm -f gdb.txt
+file main.elf
+target remote :3333
+set debug timestamp on
+b main
+b main.c:95
+b main.c:109
+b main.c:136
+b main.c:166
+b vApplicationIdleHook
+b my_switched_in_task
+commands 2 3 4 5 6 7
+    echo tick:
+    output xTickCount
+    echo current:
+    output {uint32_t} 0xE000e018
+    echo countDown:
+    output {uint32_t} 0xE000e014
+	c
+end
+c
+set logging on
+c
+
+	
